@@ -19,7 +19,7 @@ export function Posts({ posts }: { posts: POSTS_QUERYResult }) {
       {posts.map((post) => (
         <li key={post._id}>
           <Link
-            className="block p-4 hover:bg-blue-50"
+            className="block p-4 hover:bg-blue-50 text-lg font-bold"
             href={`/posts/${post?.slug?.current}`}
           >
             {post?.title}

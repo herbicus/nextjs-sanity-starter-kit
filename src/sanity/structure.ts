@@ -1,12 +1,28 @@
 import type { StructureResolver } from "sanity/structure";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faClipboard,
+  faNewspaper,
+  faRectangleList,
+  faCircleUser,
+  faWindowMaximize
+} from "@fortawesome/free-regular-svg-icons";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
-      S.documentTypeListItem("site").title("Site"),
-      S.documentTypeListItem("projectPost").title("Projects"),
+      S.documentTypeListItem("site")
+        .title("Site")
+        .icon(() => React.createElement(FontAwesomeIcon, { icon: faWindowMaximize })),
+      S.documentTypeListItem("projectPost")
+        .title("Projects")
+        .icon(() =>
+          React.createElement(FontAwesomeIcon, { icon: faClipboard })
+        ),
 
       S.divider(),
 
@@ -17,7 +33,17 @@ export const structure: StructureResolver = (S) =>
             item.getId()!
           )
       ),
-      S.documentTypeListItem("post").title("Posts"),
-      S.documentTypeListItem("category").title("Categories"),
-      S.documentTypeListItem("author").title("Authors"),
+      S.documentTypeListItem("post")
+        .title("Posts")
+        .icon(() =>
+          React.createElement(FontAwesomeIcon, { icon: faNewspaper })
+        ),
+      S.documentTypeListItem("category")
+        .title("Categories")
+        .icon(() =>
+          React.createElement(FontAwesomeIcon, { icon: faRectangleList })
+        ),
+      S.documentTypeListItem("author")
+        .title("Authors")
+        .icon(() => React.createElement(FontAwesomeIcon, { icon: faCircleUser })),
     ]);
