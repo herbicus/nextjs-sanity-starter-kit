@@ -1,20 +1,33 @@
-// src/app/page.tsx
+// src/app/(blog)/page.tsx
 
 import { sanityFetch } from "@/sanity/lib/live";
-import { PROJECTS_QUERY } from "@/sanity/lib/queries";
-import ProjectsList from "@/components/ProjectsList";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { Metadata } from "next";
 
-export default async function LandingPage() {
-  const { data: projects } = await sanityFetch({ query: PROJECTS_QUERY });
+import { Demo } from "@/templates/Demo";
 
-  return (
-    <section className="site-container site-max-w py-4">
-      <div className="grid grid-cols-4 md:grid-cols-12 gap-4">
-        <ProjectsList
-          projects={projects ?? []}
-          className="col-span-4 md:col-span-10 md:col-start-2"
-        />
-      </div>
-    </section>
-  );
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Website Homepage",
+  description: "Read our latest articles and blog posts",
+  openGraph: {
+    title: "Website Homepage",
+    description: "Read our latest articles and blog posts",
+    images: ["/images/meta/fallback-og-image.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Website Homepage",
+    description: "Read our latest articles and blog posts",
+    images: ["/images/meta/fallback-og-image.jpg"],
+  },
+};
+
+export default async function Page() {
+  const { data: posts } = await sanityFetch({
+    query: POSTS_QUERY,
+  });
+
+  return <Demo posts={posts} />;
 }

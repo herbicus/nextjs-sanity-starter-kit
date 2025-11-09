@@ -1,4 +1,6 @@
-import SitePreviewLayout from "@/layouts/SitePreviewLayout";
+// src/app/(page)/layout.tsx
+
+import { SitePreviewLayout } from "@/layouts/SitePreviewLayout";
 
 export default async function RootLayout({
   children,

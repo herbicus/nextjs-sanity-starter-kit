@@ -1,0 +1,64 @@
+@utility site-display {
+  font-size: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
+  @apply leading-tight font-bold tracking-tight;
+}
+
+@utility site-display-medium {
+  font-size: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+  @apply leading-tight font-bold tracking-tight;
+}
+
+@utility site-display-small {
+  font-size: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+  @apply leading-tight font-bold tracking-tight;
+}
+
+h1,
+.h100 {
+  @apply text-5xl leading-tight font-bold tracking-tight;
+}
+
+h2,
+.h200 {
+  @apply text-4xl leading-tight font-bold tracking-tight;
+}
+
+h3,
+.h300 {
+  @apply text-3xl leading-tight font-bold;
+}
+
+h4,
+.h400 {
+  @apply text-2xl leading-snug font-bold;
+}
+
+h5,
+.h500 {
+  @apply text-xl leading-normal font-bold;
+}
+
+h6,
+.h600 {
+  @apply text-lg leading-normal font-bold;
+}
+
+.body-small {
+  @apply text-sm leading-relaxed font-normal;
+}
+
+.subtitle {
+  @apply text-lg leading-normal font-normal;
+}
+
+.subtitle-small {
+  @apply text-base leading-normal font-medium;
+}
+
+.caption {
+  @apply text-xs leading-normal font-normal text-gray-400;
+}
+
+.overline {
+  @apply rounded bg-gray-600 px-2 py-1 text-xs font-medium tracking-wider text-white uppercase;
+}

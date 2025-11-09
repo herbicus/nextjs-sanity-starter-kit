@@ -1,56 +1,52 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
-import type { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import NextJsLockup from "@/components/SVGs/NextJsLockup";
 
-export interface SocialNavItem {
+interface NavItem {
   name: string;
   value: string;
-  icon: IconDefinition;
 }
 
 interface FooterProps {
-  navItems: SocialNavItem[];
-  children?: React.ReactNode;
+  navItems: NavItem[];
 }
 
-const Footer = ({ navItems }: FooterProps) => {
+const Header: React.FC<FooterProps> = ({ navItems }) => {
   return (
-    <footer className="border-0 bg-primary py-10 text-sm">
-      <nav className="flex site-container site-max-w flex-wrap items-center justify-end sm:justify-between">
-        <p className="hidden text-xs text-white sm:block">
-          © {new Date().getFullYear()} Footer
-        </p>
+    <footer className="bg-gray-800 py-20">
+      <div className="site-container site-max-w">
+        <div className="block space-y-4">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="block shrink-0 text-white"
+            title="Home"
+            aria-label="Home"
+          >
+            <span className="sr-only">Home</span>
+            <NextJsLockup
+              className="h-6 w-auto text-current"
+              aria-hidden="true"
+            />
+          </Link>
 
-        <ul className="flex flex-nowrap space-x-6">
-          {navItems &&
-            navItems.map((link, index) => {
-              const key = `social-nav-item-${index}`;
-
-              return (
-                <li key={key}>
-                  <a
-                    href={link.value}
-                    className="border-0 text-white transition hover:border-0 hover:text-secondary"
-                    target="_blank"
-                    rel="nofollow noreferrer"
-                    aria-label={link.name}
-                    title={link.name}
-                  >
-                    <span className="sr-only">{link.name}</span>
-                    <FontAwesomeIcon
-                      icon={link.icon}
-                      className="h-6! w-6!"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </li>
-              );
-            })}
-        </ul>
-      </nav>
+          <nav className="block space-y-4">
+            {navItems.map((item, index) => (
+              <Link
+                key={`drawer-menu-item-${index}`}
+                href={item.value}
+                className="block text-lg font-medium text-white hover:underline"
+                aria-label={item.name}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
     </footer>
   );
 };
 
-export default Footer;
+export default Header;

@@ -293,7 +293,20 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 export type POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
+  description: string | null;
   slug: Slug | null;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 }>;
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{  _id,  _type,  title,  body,  mainImage,  relatedPosts[]{    _key, // required for drag and drop    ...@->{_id, title, slug} // get fields from the referenced post  }}
@@ -301,6 +314,7 @@ export type POST_QUERYResult = {
   _id: string;
   _type: "post";
   title: string | null;
+  description: string | null;
   body: Array<{
     children?: Array<{
       marks?: Array<string>;

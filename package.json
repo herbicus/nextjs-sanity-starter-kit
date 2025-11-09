@@ -1,5 +1,5 @@
 {
-  "name": "sanity-nextjs-app",
+  "name": "nextjs-sanity-starter-kit",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,8 @@
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
     "@headlessui/react": "^2.2.9",
-    "@sanity/icons": "^3.4.0",
+    "@next/third-parties": "^16.0.1",
+    "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^4.12.0",
     "clsx": "^2.1.1",
@@ -24,16 +25,19 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sanity": "^4.12.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "patch-package": "^8.0.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

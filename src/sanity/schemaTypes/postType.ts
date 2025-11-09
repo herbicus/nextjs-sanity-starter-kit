@@ -1,6 +1,8 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import PostSlugInput from "@/sanity/ui/PostSlugInput";
+
 export const postType = defineType({
   name: "post",
   title: "Post",
@@ -10,10 +12,21 @@ export const postType = defineType({
     defineField({
       name: "title",
       type: "string",
+      description: "The title of the post, also used as the SEO title",
+    }),
+    defineField({
+      name: "description",
+      type: "text",
+      rows: 3,
+      description:
+        "The description of the post, also used as the SEO description",
     }),
     defineField({
       name: "slug",
       type: "slug",
+      components: {
+        input: PostSlugInput,
+      },
       options: {
         source: "title",
       },
@@ -36,6 +49,7 @@ export const postType = defineType({
           title: "Alternative text",
         },
       ],
+      description: "The main image of the post, also used as the SEO image",
     }),
     defineField({
       name: "categories",

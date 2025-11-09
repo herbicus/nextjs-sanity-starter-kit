@@ -1,75 +1,44 @@
 import { SanityLive } from "@/sanity/lib/live";
+import { DisableDraftMode } from "@/components/Preview/DisableDraftMode";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
-import { DisableDraftMode } from "@/components/DisableDraftMode";
 
+import { DialogProvider } from "@/context/DialogContext";
 import { ScrollProvider } from "@/context/ScrollContext";
 
-import Main from "@/templates/Main";
-
-import {
-  faAddressCard,
-  faHouse,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-
-import {
-  faFacebook,
-  faInstagram,
-  faXTwitter,
-  faLinkedin,
-  faCodepen,
-} from "@fortawesome/free-brands-svg-icons";
-
-import type { NavItem } from "@/components/Navigation/Header";
-
-export const socialLinks = [
-  {
-    name: "LinkedIn",
-    value: "https://www.linkedin.com",
-    icon: faLinkedin,
-  },
-  {
-    name: "Instagram",
-    value: "https://www.instagram.com",
-    icon: faInstagram,
-  },
-  { name: "X/Twitter", value: "https://x.com", icon: faXTwitter },
-  {
-    name: "Facebook",
-    value: "https://www.facebook.com",
-    icon: faFacebook,
-  },
-];
+import Header from "@/components/Navigation/Header/Header";
+import Footer from "@/components/Navigation/Footer";
 
 interface SitePreviewLayoutProps {
   children: React.ReactNode;
 }
 
-const navItems: NavItem[] = [
-  { name: "Home", value: "/" },
-  { name: "About", value: "/about" },
-  { name: "Blog", value: "/posts" },
-  { name: "Contact", value: "/contact" },
-];
+export async function SitePreviewLayout({ children }: SitePreviewLayoutProps) {
+  // fpo nav items
+  const navItems = [
+    { name: "Home", value: "/" },
+    { name: "Posts", value: "/posts" },
+  ];
 
-export default async function SitePreviewLayout({
-  children,
-}: SitePreviewLayoutProps) {
-  const { isEnabled } = await draftMode();
   return (
     <ScrollProvider>
-      <Main navItems={navItems} socialNavItems={socialLinks}>
-        {children}
-      </Main>
+      <DialogProvider>
+        <Header navItems={navItems} />
 
-      <SanityLive />
-      {isEnabled ? (
-        <>
-          <DisableDraftMode />
-          <VisualEditing />
-        </>
-      ) : null}
+        <main className="relative pt-24">
+          {children}
+
+          <SanityLive />
+          {(await draftMode()).isEnabled && (
+            <>
+              <DisableDraftMode />
+              <VisualEditing />
+            </>
+          )}
+        </main>
+
+        <Footer navItems={navItems} />
+      </DialogProvider>
     </ScrollProvider>
   );
 }
