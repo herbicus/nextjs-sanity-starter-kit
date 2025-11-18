@@ -5,12 +5,15 @@ import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const StudioLogo: React.FC = () => {
   return (
-    <div className="flex items-center justify-center rounded bg-gray-100 p-1">
-      <FontAwesomeIcon
-        icon={faCode}
-        className="size-6 text-amber-700"
-      />
-    </div>
+    <FontAwesomeIcon
+      icon={faCode}
+      style={{
+        color: "oklch(50.5% 0.213 27.518)",
+        fill: "currentColor",
+        width: 24,
+        height: 24,
+      }}
+    />
   );
 };
 

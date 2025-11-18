@@ -60,6 +60,80 @@ You can start editing the page by modifying `app/(page)/page.tsx`. The page auto
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Inter](https://fonts.google.com/specimen/Inter).
 
+## Sanity Dashboard
+
+The [Sanity Dashboard](https://www.sanity.io/docs/dashboard) is the central hub for your content operations. Here you'll find your deployed [studios](https://www.sanity.io/docs/studio), [custom apps](https://www.sanity.io/docs/app-sdk), and official Sanity apps like [Canvas](https://www.sanity.io/docs/canvas/canvas-user-guide) and [Media Library](https://www.sanity.io/docs/media-library) (*Media Library comes with higher tier plans).
+
+### Canvas
+
+<img src="public/images/preview/screenshot-sanity-create.png" alt="Preview of Sanity Dashboard API Tab" width="600" />
+
+Canvas is another UI layer on top of Sanity Studio that actually maps out to the document of you're chosing. In this case, it's the `post` document. Canvas is avaiable to anyone with a Sanity account but you have to configure [content mapping](https://www.sanity.io/docs/canvas/configure-content-mapping) correctly and point to a project and document type (e.g., `post`).
+
+[Canvas uses the content mappings](https://www.sanity.io/docs/canvas/canvas-content-mapping) to connect the editor tool to your structured data.
+
+#### Deploying schema manifest
+
+For embedded studios, the manifest must be accessible at `/studio/static/create-manifest.json`. This must be configured correctly for Canvas to work in Studio. Run once everything is configured or when you add/edit a schema:
+
+```bash
+npm run schema:deploy
+```
+
+
+### Gotcha
+For the `sanity.config` icon field, use a `<svg>` tag with inline css e.g.,
+```
+import React from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
+
+const StudioLogo: React.FC = () => {
+  return (
+    <FontAwesomeIcon
+      icon={faCode}
+      style={{
+        color: "oklch(50.5% 0.213 27.518)",
+        fill: "currentColor",
+        width: 24,
+        height: 24,
+      }}
+    />
+  );
+};
+
+export default StudioLogo;
+```
+
+If you use an `<img>` tag, use a base64 encoded image as the src e.g.,
+
+```
+import React from "react";
+import Image from "next/image";
+
+const StudioLogo: React.FC = () => {
+  return (
+    <Image
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAQAElEQVR4AexdB5wUxdL/d8....
+      width={48}
+      height={48}
+      alt="Logo"
+      style={{
+        color: "transparent",
+        display: "block",
+        width: 24,
+        height: 24,
+        objectFit: "contain",
+      }}
+    />
+  );
+};
+
+export default StudioLogo;
+
+```
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
